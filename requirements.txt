@@ -1,0 +1,7 @@
+streamlit==1.24.0        # Streamlit for web applications
+numpy>=1.21.0            # NumPy for numerical operations
+pandas>=1.4.0            # Pandas for data manipulation
+matplotlib>=3.5.0        # Matplotlib for plotting
+scikit-learn>=1.1.0      # Scikit-learn for machine learning
+requests>=2.27.0         # Requests for HTTP requests
+plotly>=5.10.0           # Plotly for interactive plotting
