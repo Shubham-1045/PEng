@@ -2,7 +2,11 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
+import requests
+from PyPDF2 import PdfReader
 import io
+from io import BytesIO
+
 
 # Function to calculate relative permeabilities and capillary pressure
 def calculate_properties_water_oil(Sw, Swc, Sorw, Kro_max, krw_max, no, nw, pc_max, npc):
@@ -29,26 +33,26 @@ def export_to_ecl(system, saturation, kro, krw_or_krg, pc):
     if system == 'Water-Oil System':
         
         lines.append("SWOF")
-        lines.append("--" + "\t" + "Sw" + "\t" + "Krw" + "\t" + "Krow" + "\t" + "Pcow")
+        lines.append("--" + "Sw" + "\t" + "Krw" + "\t" + "Krow" + "\t" + "Pcow")
         for sw, krw, krow, pcow in zip(saturation, krw_or_krg, kro, pc):
-            lines.append(f" {sw:.4f} {krw:.4f} {krow:.4f} {pcow:.4f}")
+            lines.append(f" {sw:.4f} \t{krw:.4f} \t{krow:.4f} \t{pcow:.4f}")
         lines.append("/")
     
     elif system == 'Gas-Oil System':
         
         lines.append("SGOF")
-        lines.append("--" + "\t" + "Sg" + "\t" + "Krg" + "\t" + "Krog" + "\t" + "Pcog")
+        lines.append("--" + "Sg" + "\t" + "Krg" + "\t" + "Krog" + "\t" + "Pcog")
         for sg, krg, krog, pcog in zip(saturation, krw_or_krg, kro, pc):
             s_complement = 1.0 - sg
-            lines.append(f" {s_complement:.4f} {krg:.4f} {krog:.4f} {pcog:.4f}")
+            lines.append(f" {s_complement:.4f} \t{krg:.4f} \t{krog:.4f} \t{pcog:.4f}")
         lines.append("/")
     
     elif system == 'Gas-Water System':
         
         lines.append("SGWFN")
-        lines.append("--" + "\t" + "Sg" + "\t" + "Krg" + "\t" + "Krwg" + "\t" + "Pcwg")
+        lines.append("--" + "Sg" + "\t" + "Krg" + "\t" + "Krwg" + "\t" + "Pcwg")
         for sg, krg, krwg, pcwg in zip(saturation, kro, krw_or_krg, pc):
-            lines.append(f" {sg:.4f} {krg:.4f} {krwg:.4f} {pcwg:.4f}")
+            lines.append(f" {sg:.4f} \t{krg:.4f} \t{krwg:.4f} \t{pcwg:.4f}")
         lines.append("/")
 
     ecl_data = "\n".join(lines)
@@ -238,10 +242,34 @@ except Exception as e:
     st.error(f"Error in calculation: {e}")
 
 # Read the existing PDF file
-pdf_file_path = r"C:\Users\Shubham B. Patel\Equations Used - Kr and Pc.pdf"  # Use raw string to avoid unicode error
-with open(pdf_file_path, "rb") as f:
-    pdf_data = f.read()
+# Google Drive link
+drive_link = "https://drive.google.com/file/d/1JQ1GvX-VJXFG4oEeG7fQdw7o2zVde6H_/view?usp=drive_link"
 
+# Extract file ID from the Google Drive link
+file_id = drive_link.split('/d/')[1].split('/')[0]
+
+# Create a downloadable link
+download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+# Function to check if the content is a PDF
+def is_pdf(content):
+    return content[:4] == b'%PDF'
+
+# Download the PDF file
+try:
+    response = requests.get(download_url, stream=True)
+    response.raise_for_status()  # Ensure we notice bad responses
+    content = response.content
+    if not is_pdf(content):
+        print("The file is not a PDF or is corrupted.")
+        exit(1)
+    
+    # Read the PDF data
+    pdf_data = BytesIO(content)
+    reader = PdfReader(pdf_data)
+except requests.exceptions.RequestException as e:
+    print(f"Failed to download the PDF file: {e}")
+    exit(1)
 
 # Custom CSS to set button height
 st.markdown(
@@ -286,12 +314,12 @@ try:
             use_container_width=True
         )
         
-    ecl_data = export_to_ecl("system_placeholder", df.iloc[:, 0], df.iloc[:, 1], df.iloc[:, 2], df.iloc[:, 3])
-    
+    ecl_data = export_to_ecl(system, df.iloc[:, 0], df.iloc[:, 1], df.iloc[:, 2], df.iloc[:, 3])  # Corrected variable name
+
     with col2:
         st.download_button(
             label="Download E-100 Sim INC File",
-            data=ecl_data,
+            data=ecl_data.encode('utf-8'),  # Corrected data encoding
             file_name="relative_permeability.INC",
             mime="text/plain",
             key="E-100-download",
