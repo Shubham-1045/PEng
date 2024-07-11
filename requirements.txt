@@ -5,3 +5,4 @@ matplotlib>=3.5.0        # Matplotlib for plotting
 scikit-learn>=1.1.0      # Scikit-learn for machine learning
 requests>=2.27.0         # Requests for HTTP requests
 plotly>=5.10.0           # Plotly for interactive plotting
+PyPDF2>=3.0.0
