@@ -342,7 +342,7 @@ except Exception as e:
 st.markdown(
     """
     ---
-    Developed by [Shubham B. Patel](https://www.linkedin.com/in/shubham-patel-1045/), P.E., under the guidance of Reservoir Engineering Consultant [Alan Mourgues](https://www.linkedin.com/in/alan-mourgues/), MSc, founder of [CrowdField](https://www.crowdfield.net/).
+    Developed by [Shubham B. Patel](https://www.linkedin.com/in/shubham-patel-1045/), R.E., under the guidance of Reservoir Engineering Consultant [Alan Mourgues](https://www.linkedin.com/in/alan-mourgues/), MSc, founder of [CrowdField](https://www.crowdfield.net/).
     
     This work was carried out as a Case Study for the mentoring & collaboration program, part of the value proposition of the CrowdField community. Visit [crowdfield.net](http://crowdfield.net/) to learn more.
     
