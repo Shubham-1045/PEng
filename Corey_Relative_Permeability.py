@@ -348,7 +348,7 @@ st.markdown(
     
     Interested in getting involved or collaborate? Get in touch at hello@crowdfield.net
     
-    Visit [crowdfield.net](crowdfield.net) to learn more.
+    Visit [CrowdField.net](https://www.crowdfield.net/) to learn more.
     
     """
 )
