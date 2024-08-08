@@ -344,8 +344,11 @@ st.markdown(
     ---
     Developed by [Shubham B. Patel](https://www.linkedin.com/in/shubham-patel-1045/), R.E., under the guidance of Reservoir Engineering Consultant [Alan Mourgues](https://www.linkedin.com/in/alan-mourgues/), MSc, founder of [CrowdField](https://www.crowdfield.net/).
     
-    This work was carried out as a Case Study for the mentoring & collaboration program, part of the value proposition of the CrowdField community. Visit [crowdfield.net](http://crowdfield.net/) to learn more.
+    This work was carried out as a Case Study for the mentoring & collaboration program, part of the value proposition of the CrowdField community (https://www.crowdfield.net/blogposts/case-study-collaborating-with-a-young-engineer-to-develop-a-streamlit-relative-permeability-app).
     
-    Interested in getting involved or collaborate? Get in touch at [hello@crowdfield.net](mailto:hello@crowdfield.net)
+    Interested in getting involved or collaborate? Get in touch at hello@crowdfield.net
+    
+    Visit crowdfield.net to learn more.
+    
     """
 )
