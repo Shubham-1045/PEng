@@ -188,7 +188,7 @@ def generate_plots_and_data(system, params):
     return fig, pc_fig, df
 
 # Streamlit app
-st.title('Relative Permeability Curves Generator')
+st.title('Saturation Functions Generator')
 
 default_params = {
     'Water-Oil System': {'Swc': 0.25, 'Kro_max': 0.85, 'Sorw': 0.35, 'krw_max': 0.4, 'no': 0.9, 'nw': 1.5, 'npc': 0.71, 'pc_max': 20.0},
