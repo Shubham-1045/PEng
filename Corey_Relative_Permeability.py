@@ -87,8 +87,8 @@ def plot_properties(system, x_values, y_values_1, y_values_2):
     y_values_1 = np.clip(y_values_1, 0, 1)
     y_values_2 = np.clip(y_values_2, 0, 1)
 
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines', name=y1_label, line=go.scatter.Line(color=color1, dash='solid', width=2)))
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines', name=y2_label, line=go.scatter.Line(color=color2, dash='solid', width=2)))
+    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines+markers', name=y1_label, line=go.scatter.Line(color=color1, dash='solid', width=2)))
+    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines+markers', name=y2_label, line=go.scatter.Line(color=color2, dash='solid', width=2)))
     fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_1[0], y_values_1[-1]], mode='markers', name=f'{y1_label} end points', marker=dict(color=color1, size=8)))
     fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_2[0], y_values_2[-1]], mode='markers', name=f'{y2_label} end points', marker=dict(color=color2, size=8)))
 
@@ -138,8 +138,8 @@ def plot_properties(system, x_values, y_values_1, y_values_2):
     y_values_1 = np.clip(y_values_1, 0, 1)
     y_values_2 = np.clip(y_values_2, 0, 1)
 
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines', name=y1_label, line=go.scatter.Line(color=color1, dash='solid', width=2)))
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines', name=y2_label, line=go.scatter.Line(color=color2, dash='solid', width=2)))
+    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines+markers', name=y1_label, line=go.scatter.Line(color=color1, dash='solid', width=2)))
+    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines+markers', name=y2_label, line=go.scatter.Line(color=color2, dash='solid', width=2)))
     fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_1[0], y_values_1[-1]], mode='markers', name=f'{y1_label} end points', marker=dict(color=color1, size=8)))
     fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_2[0], y_values_2[-1]], mode='markers', name=f'{y2_label} end points', marker=dict(color=color2, size=8)))
 
