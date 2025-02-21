@@ -87,59 +87,8 @@ def plot_properties(system, x_values, y_values_1, y_values_2):
     y_values_1 = np.clip(y_values_1, 0, 1)
     y_values_2 = np.clip(y_values_2, 0, 1)
 
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines+markers', name=y1_label, line=go.scatter.Line(color=color1, dash='solid', width=2)))
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines+markers', name=y2_label, line=go.scatter.Line(color=color2, dash='solid', width=2)))
-    fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_1[0], y_values_1[-1]], mode='markers', name=f'{y1_label} end points', marker=dict(color=color1, size=8)))
-    fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_2[0], y_values_2[-1]], mode='markers', name=f'{y2_label} end points', marker=dict(color=color2, size=8)))
-
-    fig.update_layout(
-        title=title,
-        title_x=0,  # Align title to the left
-        title_y=1,  # Position title at the top
-        xaxis_title=x_label,
-        yaxis_title='Relative Permeability',
-        xaxis=dict(range=[0, 1], dtick=0.2),
-        yaxis=dict(range=[0, 1]),  # Fix y-axis between 0 and 1
-        showlegend=False,  # Hide legend
-        margin=dict(l=20, r=20, t=50, b=20),  # Reduce margins
-        height=400,  # Plot height
-        width=600,  # Plot width
-        title_xanchor='left',  # Anchor title to the left
-        title_yanchor='top'  # Anchor title to the top
-    )
-
-    return fig
-
-def plot_properties(system, x_values, y_values_1, y_values_2):
-    fig = go.Figure()
-    if system == 'Water-Oil System':
-        x_label = 'Water Saturation (Sw)'
-        y1_label = 'Oil Relative Permeability (kro)'
-        y2_label = 'Water Relative Permeability (krw)'
-        title = 'Water-Oil System Relative Permeability'
-        color1 = 'green'
-        color2 = 'blue'
-    elif system == 'Gas-Oil System':
-        x_label = 'Liquid Saturation (Sl)'
-        y1_label = 'Gas Relative Permeability (krg)'
-        y2_label = 'Oil Relative Permeability (kro)'
-        title = 'Gas-Oil Relative Permeability'
-        color1 = 'red'
-        color2 = 'green'
-    elif system == 'Gas-Water System':
-        x_label = 'Water Saturation (Sw)'
-        y1_label = 'Gas Relative Permeability (krg)'
-        y2_label = 'Water Relative Permeability (krw)'
-        title = 'Gas-Water Relative Permeability'
-        color1 = 'red'
-        color2 = 'blue'
-
-    # Clamp y_values to range [0, 1]
-    y_values_1 = np.clip(y_values_1, 0, 1)
-    y_values_2 = np.clip(y_values_2, 0, 1)
-
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines+markers', name=y1_label, line=go.scatter.Line(color=color1, dash='solid', width=2)))
-    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines+markers', name=y2_label, line=go.scatter.Line(color=color2, dash='solid', width=2)))
+    fig.add_trace(go.Scatter(x=x_values, y=y_values_1, mode='lines', name=y1_label, line=dict(color=color1)))
+    fig.add_trace(go.Scatter(x=x_values, y=y_values_2, mode='lines', name=y2_label, line=dict(color=color2)))
     fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_1[0], y_values_1[-1]], mode='markers', name=f'{y1_label} end points', marker=dict(color=color1, size=8)))
     fig.add_trace(go.Scatter(x=[x_values[0], x_values[-1]], y=[y_values_2[0], y_values_2[-1]], mode='markers', name=f'{y2_label} end points', marker=dict(color=color2, size=8)))
 
@@ -179,7 +128,7 @@ def plot_capillary_pressure(system, S, pc):
         title = 'Gas-Water Capillary Pressure'
 
     if len(S) > 0:
-        fig.add_trace(go.Scatter(x=S, y=pc, mode='lines', name='Capillary Pressure (pc)', line=go.scatter.Line(color='dimgray', width=2, dash='solid')))
+        fig.add_trace(go.Scatter(x=S, y=pc, mode='lines', name='Capillary Pressure (pc)', line=dict(color='dimgray')))
         fig.add_trace(go.Scatter(x=[S[0], S[-1]], y=[pc[0], pc[-1]], mode='markers', name='pc end points', marker=dict(color='dimgray', size=8)))
     
     fig.update_layout(
